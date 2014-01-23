@@ -1,6 +1,6 @@
 server {
 	listen   80 default;
-	server_name  localhost;
+	server_name  beacon;
 
 	log_format analytics '$remote_user [$time_local] - $remote_addr - $http_x_forwarded_for - $http_referer - $http_user_agent - $query_string';
 
@@ -13,8 +13,13 @@ server {
 	}
 
 	location /track.gif {
+		server_tokens off; # Remove nginx version number from server header
 
-		add_header    Cache-Control  private,no-cache,no-cache=Set-Cookie,proxy-revalidate;
+		expires       epoch;
+		add_header    Content-Type  	image/gif;
+		add_header    Cache-Control  	private,no-cache,no-cache=Set-Cookie,proxy-revalidate;
+		add_header    Pragma  			no-cache;
+		add_header    Server  			"Ninox affinis"; # Some Bubo(Box) branding
 
     	empty_gif;
 	}
