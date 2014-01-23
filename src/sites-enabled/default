@@ -1,14 +1,11 @@
-# You may add here your
-# server {
-#	...
-# }
-# statements for each of your virtual hosts
-
 server {
 	listen   80 default;
 	server_name  localhost;
 
+	log_format analytics '$remote_user [$time_local] - $remote_addr - $http_x_forwarded_for - $http_referer - $http_user_agent - $query_string';
+
 	access_log  /var/log/nginx/localhost.access.log;
+	access_log  /vagrant/event.log analytics;
 
 	location / {
 		root   /var/www/nginx-default;
