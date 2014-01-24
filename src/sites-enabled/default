@@ -2,7 +2,7 @@ server {
 	listen   80 default;
 	server_name  beacon;
 
-	log_format analytics '$remote_user [$time_local] - $remote_addr - $http_x_forwarded_for - $http_referer - $http_user_agent - $query_string';
+	log_format analytics '$msec;$arg_wid;$arg_eid;$arg_uid;$arg_pid;$arg_ec;$arg_ea;$arg_el;$arg_ev;($arg_cr|$http_referer);$arg_cl;$arg_cs;$arg_m1;$arg_m2;$http_user_agent;$cookie_COOKIE;$scheme;($remote_addr|$http_x_forwarded_for)';
 
 	access_log  /var/log/nginx/localhost.access.log;
 	access_log  /vagrant/event.log analytics;
