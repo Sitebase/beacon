@@ -7,11 +7,6 @@ server {
 	access_log  /var/log/nginx/localhost.access.log;
 	access_log  /vagrant/event.log analytics;
 
-	location / {
-		root   /var/www/nginx-default;
-		index  index.html index.htm;
-	}
-
 	location /track.gif {
 		server_tokens off; # Remove nginx version number from server header
 
@@ -22,18 +17,6 @@ server {
 		add_header    Server  			"Ninox affinis"; # Some Bubo(Box) branding
 
     	empty_gif;
-	}
-
-	location /doc {
-		root   /usr/share;
-		autoindex on;
-		allow 127.0.0.1;
-		deny all;
-	}
-
-	location /images {
-		root   /usr/share;
-		autoindex on;
 	}
 
 }
